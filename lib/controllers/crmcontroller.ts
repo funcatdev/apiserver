@@ -26,7 +26,7 @@ export class ContactController {
                 if(contact!=null){
                     res.json(contact);
                 }else{
-                    res.status(400).json({
+                    res.status(201).send({
                         status:false,
                         msg:'没有找到此用户'
                     })
