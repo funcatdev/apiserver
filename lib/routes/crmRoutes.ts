@@ -9,23 +9,30 @@ export class Routes{
 
 
     public routes(app:Application):void {
-        app.route('/')
+        app.route('/api/v1')
             .get((req:Request,res:Response)=>{
                 res.status(200).send({
                     message:'Get request ok!'
                 })
             })
         
-        app.route('/contact')
+        app.route('/api/v1/contacts')
             .get(this.contactController.GetAllContacts)
-            .post(this.contactController.AddNewContact)
+           
 
         // one detail
-        app.route('/contact/:contactId')
+        app.route('/api/v1/contact/:contactId')
             .get(this.contactController.GetContactFromID)
             .put(this.contactController.UpdateContact)
             .delete(this.contactController.DeleteContact)
 
-        
+        // 添加用户
+        app.route('/api/v1/contact')
+            .get(this.contactController.getVerificyCodeFromPhone)
+            .post(this.contactController.AddNewContact)
+
+        // VerifyCode
+        app.route('/api/v1/verifycode')
+            .post(this.contactController.verifyCode)
     }
 }
